@@ -1,24 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
+<div class="d-flex justify-content-center">
+<div class="card mt-5" style="width: 18rem;">
+  <div class="card-header">
+    <h5><%= @event.name %></h5>
+  </div>
+  <div class="card-body">
+    <p class="card-text"><strong>Event:</strong> <%= @event.name %></p>
+    <p class="card-text"><strong>Description:</strong> <%= @event.description %></p>
+    <p class="card-text"><strong>Date:</strong>  <%= @event.date %></p>
+  </div>
+  <div class="card-footer">
+    <p><strong>Event by:</strong> <%= @event.creator.name  %></p>
+  </div>
+</div>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
 
-<p>
-  <strong>Location:</strong>
-  <%= @event.location %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @event.date %>
-</p>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
