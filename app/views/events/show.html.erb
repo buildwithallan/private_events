@@ -9,11 +9,35 @@
     <p class="card-text"><strong>Event:</strong> <%= @event.name %></p>
     <p class="card-text"><strong>Description:</strong> <%= @event.description %></p>
     <p class="card-text"><strong>Date:</strong>  <%= @event.date %></p>
-  </div>
-  <div class="card-footer">
     <p><strong>Event by:</strong> <%= @event.creator.name  %></p>
   </div>
+
+  <% if user_signed_in? %>
+
+  <div class="card-footer d-flex">
+     <%= form_with(model: @event_attendance, url: event_attendances_path) do |f| %>
+        <%= f.hidden_field :event_id, :value => @event.id %>
+          <%= f.submit "attend", class: "btn-sm btn-primary" %>
+      <% end %>
+
+    <% if current_user == @event.creator %>
+     <%= link_to "Edit", edit_event_path(@event.id), class: "btn-sm btn-secondary"%>
+     <%= link_to "Delete", event_path(@event.id), method: :delete, data: {confirm: 'Delete Event?'}, class: "btn-sm btn-danger"%>
+    <% end %>
+  </div>
+  
 </div>
+<div class="card mt-5 mx-3" style="width:18rem">
+    
+      <strong class="text-center mb-2">Attendees:</strong>
+      <ol>
+      <% @attendees.each do |attendee| %>
+        <li><%= attendee.name %></li>
+      <% end %>
+    </ol>
+   
+  </div>
+   <% end %>
 </div>
 
 
